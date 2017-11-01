@@ -30,6 +30,14 @@ namespace AntiForgery
                 //On POST requests it will validate the XSRF header
                 if (!await antiforgery.IsRequestValidAsync(context))
                 {
+                    
+                    /****************************************************
+                     *
+                     *
+                     * For some reason when the cookie and the header are sent in on the /create POST this validation always fails
+                     * 
+                     * 
+                     ***************************************************/
                     context.Response.StatusCode = 401;
                     
                     logger.LogError("INVALID XSRF TOKEN");
